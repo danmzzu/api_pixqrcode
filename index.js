@@ -48,7 +48,7 @@ function generatePixCode(pixData) {
     return codeBeforeCRC + crc16;
 }
 
-app.post('/qrcode', async (req, res) => {
+app.post('/', async (req, res) => {
     try {
         const pixData = req.body;
         const pixCode = generatePixCode(pixData);
