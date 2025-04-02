@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <!-- Metatags -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="language" content="Portuguese">
+        <meta name="description" content="...">
+        <meta name="keywords" content="...">
+        <meta name="author" content="...">
+        <meta name="robots" content="follow, index">
+        <meta name="google" content="notranslate">
+
+        <!-- Social Metatags -->
+        <meta property="og:title" content="...">
+        <meta property="og:description" content="...">
+        <meta property="og:image" content="...">
+        <meta property="og:url" content="...">
+        <meta property="og:type" content="...">
+        <meta property="og:locale" content="pt_BR">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="favicon.ico">
+
+        <!-- Title -->
+        <title>Usage</title>
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="...">
+
+        <!-- Scripts -->
+        <script defer src="scripts/jquery.js"></script>
+        <script defer src="scripts/jquery_mask.js"></script>
+        <script defer src="scripts/usage.js"></script>
+    </head>
+    <body>
+
+        <h1>Gerador de QR Code Pix</h1>
+    
+        <label>Chave Pix:</label>
+        <input type="text" id="pixKey" class="phone" value="+5516993630686"><br>
+
+        <label>Valor (opcional):</label>
+        <input type="text" id="value" class="money" value="10.00" maxlength="250"><br>
+        <span>Minimo 4 caracteres incluindo o ponto / Valor limite de 1000 reais das 20h as 6h e depois sem limite</span><br><br>
+
+        <label>Nome:</label>
+        <input type="text" id="name" value="Daniel do Prado Mazzeu" maxlength="250"><br>
+
+        <label>Cidade:</label>
+        <input type="text" id="city" value="Araraquara" maxlength="250"><br>
+
+        <label>Info Adicional (opcional):</label>
+        <input type="text" id="additionalInfo" value="teste" maxlength="250"><br>
+
+        <button onclick="generatePix()">Gerar QR Code</button>
+
+        <h2>Código Pix:</h2>
+        <p id="pixCode"></p>
+
+        <h2>QR Code:</h2>
+        <img id="qrcode" alt="QR Code Pix">
+        
+    </body>
+</html>
