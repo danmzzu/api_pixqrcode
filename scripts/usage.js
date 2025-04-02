@@ -7,7 +7,7 @@ async function generatePix() {
         additionalInfo: document.getElementById("additionalInfo").value
     };
 
-    const response = await fetch("apipixqrcode-production.up.railway.app/qrcode", {
+    const response = await fetch("apipixqrcode-production.up.railway.app", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(pixData)
