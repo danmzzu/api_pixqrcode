@@ -4,7 +4,7 @@ const cors = require('cors');
 const crc = require('crc');
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 function generatePixCode(pixData) {
