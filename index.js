@@ -4,15 +4,15 @@ const cors = require('cors');
 const crc = require('crc');
 
 const app = express();
+app.use(express.json());
 
-const corsOptions = {
+app.use(cors());
+
+app.use(cors({
     origin: "https://danmzzu.github.io",
     methods: "POST",
     allowedHeaders: ["Content-Type"]
-};
-
-app.use(cors(corsOptions));
-app.use(express.json());
+}));
 
 function generatePixCode(pixData) {
     function formatField(id, value) {
@@ -55,32 +55,28 @@ function generatePixCode(pixData) {
     return codeBeforeCRC + crc16;
 }
 
-async function generateQRCode(pixCode) {
-    try {
-        return await QRCode.toDataURL(pixCode, { type: 'png', margin: 2, width: 512 });
-    } catch (err) {
-        throw new Error('Erro ao gerar QR Code');
-    }
-}
-
 app.post('/', async (req, res) => {
     try {
         const pixData = req.body;
         const pixCode = generatePixCode(pixData);
-        const qrcode = await generateQRCode(pixCode);
 
-        res.json({
-            pixCode,
-            qrcode,
+        QRCode.toDataURL(pixCode, { type: 'png', margin: 2, width: 512 }, (err, qrcode) => {
+            if (err) {
+                return res.status(500).json({ error: 'Error generating QR Code' });
+            }
+            res.json({
+                pixCode: pixCode,
+                qrcode: qrcode,
+            });
         });
 
     } catch (error) {
-        console.error('Erro ao gerar Pix:', error);
-        res.status(500).json({ error: error.message || 'Erro interno no servidor' });
+        console.error('Error generating Pix:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 
 const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
