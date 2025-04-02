@@ -4,7 +4,15 @@ const cors = require('cors');
 const crc = require('crc');
 
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+    origin: "https://danmzzu.github.io",
+    methods: "POST",
+    allowedHeaders: ["Content-Type"]
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 function generatePixCode(pixData) {
